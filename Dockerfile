@@ -108,7 +108,6 @@ RUN cd /opt && curl -L -o- https://github.com/yarnpkg/yarn/releases/download/v${
 
 
 # Install Google Chrome browser
-
 RUN cd /tmp && \
     wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
     apt install -y ./google-chrome-stable_current_amd64.deb fonts-liberation libappindicator3-1 libxss1 xdg-utils libdbusmenu-glib4 libdbusmenu-gtk3-4 libindicator3-7 && \
