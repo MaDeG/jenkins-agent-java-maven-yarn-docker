@@ -121,7 +121,6 @@ RUN curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 |
 RUN apt-get install apt-transport-https && \
     apt-key adv --keyserver hkp://pool.sks-keyservers.net --recv-keys 023EDB0B && \
     echo deb https://dl.bintray.com/gauge/gauge-deb stable main | tee -a /etc/apt/sources.list && \
-    apt-get update && \
     apt-get install gauge
 
 # Create bashrc
