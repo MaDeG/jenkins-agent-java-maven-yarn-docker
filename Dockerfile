@@ -114,10 +114,6 @@ RUN cd /tmp && \
     apt install -y ./google-chrome-stable_current_amd64.deb fonts-liberation libappindicator3-1 libxss1 xdg-utils libdbusmenu-glib4 libdbusmenu-gtk3-4 libindicator3-7 && \
     rm google-chrome-stable_current_amd64.deb
 
-# Install unoconv
-RUN apt-get install -y unoconv
-RUN (echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections) && apt-get install ttf-mscorefonts-installer -y
-
 # Install Helm 3
 RUN curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 
