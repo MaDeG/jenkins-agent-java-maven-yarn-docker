@@ -50,7 +50,7 @@ RUN AZ_REPO=$(lsb_release -cs) && \
     apt-get update && apt-get install azure-cli && \
     az aks install-cli
 
-	
+
 #RUN apk add --no-cache ca-certificates
 
 
@@ -69,7 +69,7 @@ RUN set -ex; \
 # + wget -O docker.tgz https://download.docker.com/linux/static/stable/x86_64/docker-17.03.1-ce.tgz
 # Connecting to download.docker.com (54.230.87.253:443)
 # wget: error getting response: Connection reset by peer
-	
+
 # this "case" statement is generated via "update.sh"
 	if ! curl -fL -o docker.tgz "https://download.docker.com/linux/static/${DOCKER_CHANNEL}/${DOCKER_ARG}/docker-${DOCKER_VERSION}.tgz"; then \
 		echo >&2 "error: failed to download 'docker-${DOCKER_VERSION}' from '${DOCKER_CHANNEL}' for '${DOCKER_ARG}'"; \
@@ -103,7 +103,7 @@ RUN cd /opt && curl -o- http://apache.mirror.serversaustralia.com.au/maven/maven
 # Install NodeJS
 RUN cd /opt && curl -o- https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.gz | tar xz
 
-# Install Yarn 
+# Install Yarn
 RUN cd /opt && curl -L -o- https://github.com/yarnpkg/yarn/releases/download/v${YARN_VERSION}/yarn-v${YARN_VERSION}.tar.gz | tar xz
 
 
