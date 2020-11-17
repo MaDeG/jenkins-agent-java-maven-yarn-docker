@@ -124,6 +124,10 @@ RUN apt-get install apt-transport-https && \
     apt-get update && \
     apt-get install gauge
 
+# Install unoconv
+RUN apt-get install -y unoconv
+RUN (echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections) && apt-get install ttf-mscorefonts-installer -y
+
 # Create bashrc
 RUN mkdir /root/.m2 && \
     echo "export JAVA_HOME=${JAVA_HOME}" >> /root/.bashrc && \
