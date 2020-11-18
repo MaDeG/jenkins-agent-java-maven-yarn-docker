@@ -24,7 +24,7 @@ ENV LD_LIBRARY_PATH="/usr/glibc-compat/lib/libc.so.6"
 USER root
 
 # Install base utilities
-RUN sed -i "s#deb http://deb.debian.org/debian stretch main#deb http://deb.debian.org/debian stretch main contrib non-free#g" /etc/apt/sources.list
+RUN sed -i 's# main$# main contrib non-free#g' /etc/apt/sources.list
 RUN apt-get update \
 	&& apt-get install -y \
 		bash \
@@ -46,7 +46,7 @@ RUN apt-get update \
 # Add Azure repo
 RUN AZ_REPO=$(lsb_release -cs) && \
     echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | \
-    tee /etc/apt/sources.list.d/azure-cli.list && \
+    tee -a /etc/apt/sources.list.d/azure-cli.list && \
     curl -L https://packages.microsoft.com/keys/microsoft.asc | apt-key add - && \
     apt-get update && apt-get install azure-cli && \
     az aks install-cli && \
