@@ -19,3 +19,8 @@ Docker pull command:
 ```bash
 docker pull apriljokers/jenkins-agent-java-maven-yarn-docker
 ```
+
+To build, run:
+```
+docker build .
+```
