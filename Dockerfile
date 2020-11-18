@@ -65,14 +65,13 @@ RUN AZ_REPO=$(lsb_release -cs) && \
 RUN echo 'hosts: files dns mdns4_minimal mdns4' > /etc/nsswitch.conf
 
 
-
-RUN set -ex; \
 # why we use "curl" instead of "wget":
 # + wget -O docker.tgz https://download.docker.com/linux/static/stable/x86_64/docker-17.03.1-ce.tgz
 # Connecting to download.docker.com (54.230.87.253:443)
 # wget: error getting response: Connection reset by peer
-
+#
 # this "case" statement is generated via "update.sh"
+RUN set -ex; \
 	if ! curl -fL -o docker.tgz "https://download.docker.com/linux/static/${DOCKER_CHANNEL}/${DOCKER_ARG}/docker-${DOCKER_VERSION}.tgz"; then \
 		echo >&2 "error: failed to download 'docker-${DOCKER_VERSION}' from '${DOCKER_CHANNEL}' for '${DOCKER_ARG}'"; \
 		exit 1; \
