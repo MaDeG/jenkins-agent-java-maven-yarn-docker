@@ -34,7 +34,7 @@ RUN apt-get update \
 		minizip \
 		libzip4 \
 		openssl \
-		python-pip \
+		python3-pip \
 		git \
 		htmldoc \
 		apt-transport-https \
@@ -49,7 +49,8 @@ RUN AZ_REPO=$(lsb_release -cs) && \
     tee /etc/apt/sources.list.d/azure-cli.list && \
     curl -L https://packages.microsoft.com/keys/microsoft.asc | apt-key add - && \
     apt-get update && apt-get install azure-cli && \
-    az aks install-cli
+    az aks install-cli && \
+    rm -rf /var/lib/apt/lists/*
 
 
 #RUN apk add --no-cache ca-certificates
@@ -89,7 +90,7 @@ COPY modprobe.sh /usr/local/bin/modprobe
 COPY docker-entrypoint.sh /usr/local/bin/
 
 # Install docker compose
-RUN pip install docker-compose
+RUN pip3 install docker-compose
 
 
 # Create /opt directory
@@ -111,8 +112,10 @@ RUN cd /opt && curl -L -o- https://github.com/yarnpkg/yarn/releases/download/v${
 # Install Google Chrome browser
 RUN cd /tmp && \
     wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
+    apt-get update && \
     apt install -y ./google-chrome-stable_current_amd64.deb fonts-liberation libappindicator3-1 libxss1 xdg-utils libdbusmenu-glib4 libdbusmenu-gtk3-4 libindicator3-7 && \
-    rm google-chrome-stable_current_amd64.deb
+    rm google-chrome-stable_current_amd64.deb && \
+    rm -rf /var/lib/apt/lists/*
 
 # Install Helm 3
 RUN curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
@@ -122,11 +125,15 @@ RUN apt-get install apt-transport-https && \
     apt-key adv --keyserver hkp://pool.sks-keyservers.net --recv-keys 023EDB0B && \
     echo deb https://dl.bintray.com/gauge/gauge-deb stable main | tee -a /etc/apt/sources.list && \
     apt-get update && \
-    apt-get install gauge
+    apt-get install gauge && \
+    rm -rf /var/lib/apt/lists/*
 
 # Install unoconv
-RUN apt-get install -y unoconv
-RUN (echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections) && apt-get install ttf-mscorefonts-installer -y
+RUN apt-get update && \
+	apt-get install -y unoconv && \
+	(echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections) && \
+	apt-get install ttf-mscorefonts-installer -y && \
+	rm -rf /var/lib/apt/lists/*
 
 # Create bashrc
 RUN mkdir /root/.m2 && \
