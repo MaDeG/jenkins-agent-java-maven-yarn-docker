@@ -148,7 +148,7 @@ WORKDIR /data
 
 USER jenkins
 
-ENTRYPOINT ["jenkins-slave"]
+ENTRYPOINT ["jenkins-agent-dind"]
 
 # Define default command.
 CMD ["bash"]
