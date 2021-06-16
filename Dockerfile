@@ -87,6 +87,7 @@ RUN set -ex; \
 
 COPY modprobe.sh /usr/local/bin/modprobe
 COPY docker-entrypoint.sh /usr/local/bin/
+COPY jenkins-agent-dind /usr/local/bin/
 
 # Install docker compose
 RUN pip3 install docker-compose
