@@ -144,7 +144,7 @@ WORKDIR /data
 
 USER jenkins
 
-ENTRYPOINT ["jenkins-agent-dind.sh"]
+ENTRYPOINT ["/usr/local/bin/jenkins-agent-dind.sh"]
 
 # Define default command.
 CMD ["bash"]
