@@ -17,7 +17,7 @@ ENV M2_HOME="/opt/apache-maven-${MAVEN_VERSION}"
 ENV NODE_HOME="/opt/node-v${NODE_VERSION}-linux-x64"
 ENV YARN_HOME="/opt/yarn-v${YARN_VERSION}"
 
-ENV PATH="$PATH:${JAVA_HOME}/bin:${M2_HOME}/bin:${NODE_HOME}/bin:${YARN_HOME}/bin"
+ENV PATH="$PATH:/usr/local/bin:${JAVA_HOME}/bin:${M2_HOME}/bin:${NODE_HOME}/bin:${YARN_HOME}/bin"
 
 ENV LD_LIBRARY_PATH="/usr/glibc-compat/lib/libc.so.6"
 
@@ -87,7 +87,7 @@ RUN set -ex; \
 
 COPY modprobe.sh /usr/local/bin/modprobe
 COPY docker-entrypoint.sh /usr/local/bin/
-COPY jenkins-agent-dind /usr/local/bin/
+COPY jenkins-agent-dind.sh /usr/local/bin/
 
 # Install docker compose
 RUN pip3 install docker-compose
@@ -144,7 +144,7 @@ WORKDIR /data
 
 USER jenkins
 
-ENTRYPOINT ["jenkins-agent-dind"]
+ENTRYPOINT ["jenkins-agent-dind.sh"]
 
 # Define default command.
 CMD ["bash"]
