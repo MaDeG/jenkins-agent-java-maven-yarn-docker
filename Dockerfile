@@ -17,7 +17,7 @@ ENV M2_HOME="/opt/apache-maven-${MAVEN_VERSION}"
 ENV NODE_HOME="/opt/node-v${NODE_VERSION}-linux-x64"
 ENV YARN_HOME="/opt/yarn-v${YARN_VERSION}"
 
-ENV PATH="$PATH:${JAVA_HOME}/bin:${M2_HOME}/bin:${NODE_HOME}/bin:${YARN_HOME}/bin"
+ENV PATH="$PATH:/usr/local/bin:${JAVA_HOME}/bin:${M2_HOME}/bin:${NODE_HOME}/bin:${YARN_HOME}/bin"
 
 ENV LD_LIBRARY_PATH="/usr/glibc-compat/lib/libc.so.6"
 
@@ -88,6 +88,7 @@ RUN set -ex; \
 
 COPY modprobe.sh /usr/local/bin/modprobe
 COPY docker-entrypoint.sh /usr/local/bin/
+COPY jenkins-agent-dind.sh /usr/local/bin/
 
 # Install docker compose
 RUN pip3 install docker-compose
@@ -121,12 +122,7 @@ RUN cd /tmp && \
 RUN curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 
 # Install Gauge
-RUN apt-get install apt-transport-https && \
-    apt-key adv --keyserver hkp://pool.sks-keyservers.net --recv-keys 023EDB0B && \
-    echo deb https://dl.bintray.com/gauge/gauge-deb stable main | tee -a /etc/apt/sources.list && \
-    apt-get update && \
-    apt-get install gauge && \
-    rm -rf /var/lib/apt/lists/*
+RUN curl -SsL https://downloads.gauge.org/stable | sh
 
 # Install unoconv
 RUN apt-get update && \
@@ -152,7 +148,7 @@ WORKDIR /data
 
 USER jenkins
 
-ENTRYPOINT ["jenkins-slave"]
+ENTRYPOINT ["/usr/local/bin/jenkins-agent-dind.sh"]
 
 # Define default command.
 CMD ["bash"]
