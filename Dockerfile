@@ -132,7 +132,7 @@ RUN apt-get update && \
 	rm -rf /var/lib/apt/lists/*
 
 # Install mkisofs
-RUN sudo apt-get update && apt-get install -y genisoimage && rm -rf /var/lib/apt/lists/* && sudo ln -s /usr/bin/genisoimage /usr/bin/mkisofs
+RUN apt-get update && apt-get install -y genisoimage && rm -rf /var/lib/apt/lists/* && sudo ln -s /usr/bin/genisoimage /usr/bin/mkisofs
 
 # Create bashrc
 RUN mkdir /root/.m2 && \
