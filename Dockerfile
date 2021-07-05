@@ -37,6 +37,7 @@ RUN apt-get update \
 		python3-pip \
 		git \
 		htmldoc \
+		mkisofs \
 		apt-transport-https \
 		lsb-release \
 		rpm \
