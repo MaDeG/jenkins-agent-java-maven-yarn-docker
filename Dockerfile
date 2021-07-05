@@ -37,12 +37,12 @@ RUN apt-get update \
 		python3-pip \
 		git \
 		htmldoc \
-		mkisofs \
 		apt-transport-https \
 		lsb-release \
 		rpm \
 		ansible \
 	&& rm -rf /var/lib/apt/lists/*
+
 
 # Add Azure repo
 RUN AZ_REPO=$(lsb_release -cs) && \
@@ -134,6 +134,9 @@ RUN apt-get update && \
 	(echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections) && \
 	apt-get install ttf-mscorefonts-installer -y && \
 	rm -rf /var/lib/apt/lists/*
+
+# Install mkisofs
+RUN sudo apt-get update && apt-get install -y genisoimage && rm -rf /var/lib/apt/lists/* && sudo ln -s /usr/bin/genisoimage /usr/bin/mkisofs
 
 # Create bashrc
 RUN mkdir /root/.m2 && \
