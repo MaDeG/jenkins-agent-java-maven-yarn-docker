@@ -33,6 +33,7 @@ RUN apt-get update \
 		tar \
 		fontconfig \
 		minizip \
+		unzip \
 		libzip4 \
 		openssl \
 		python3-pip \
