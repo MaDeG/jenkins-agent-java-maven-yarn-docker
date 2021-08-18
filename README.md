@@ -12,6 +12,7 @@ This a container that can be used as Jenkins Build Agent for building projects t
 * [RPM](https://nl.wikipedia.org/wiki/RPM_Package_Manager)
 * [Kubectl](https://kubernetes.io/docs/reference/kubectl/overview/)
 * [Ansible](https://github.com/ansible/ansible)
+* [mksisofs]
 
 Docker repository: https://hub.docker.com/r/apriljokers/jenkins-agent-java-maven-yarn-docker
 
