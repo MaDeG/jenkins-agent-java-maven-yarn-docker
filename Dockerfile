@@ -43,6 +43,7 @@ RUN apt-get update \
 		lsb-release \
 		rpm \
 		ansible \
+		procps \
 	&& rm -rf /var/lib/apt/lists/*
 
 
