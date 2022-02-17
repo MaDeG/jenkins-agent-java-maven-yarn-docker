@@ -44,6 +44,7 @@ RUN apt-get update \
 		rpm \
 		ansible \
 		procps \
+		uidmap \
 	&& rm -rf /var/lib/apt/lists/*
 
 
